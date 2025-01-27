@@ -7,6 +7,7 @@ import { createInvoice } from '@/lib/actions';
 import { SyntheticEvent, useState } from 'react';
 import Form from 'next/form';
 import SubmitButton from '@/components/SubmitButton';
+import Container from '@/components/Container';
 
 const NewInvoicePage = () => {
   const [state, setState] = useState('ready');
@@ -20,7 +21,7 @@ const NewInvoicePage = () => {
   };
 
   return (
-    <main className="flex flex-col justify-center h-full gap-6 max-w-5xl mx-auto my-12">
+    <Container>
       {/* <Container>
         {error && (
           <p className="bg-red-100 text-sm text-red-800 text-center px-3 py-2 rounded-lg mb-6">
@@ -68,7 +69,7 @@ const NewInvoicePage = () => {
         </div>
       </Form>
       {/* </Container> */}
-    </main>
+    </Container>
   );
 };
 

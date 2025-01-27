@@ -5,6 +5,7 @@ import { Invoices } from '@/db/schema';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { notFound } from 'next/navigation';
+import Container from '@/components/Container';
 
 const InvoicePage = async ({ params }: { params: { invoiceId: string } }) => {
   const invoiceId = parseInt(params.invoiceId);
@@ -22,7 +23,7 @@ const InvoicePage = async ({ params }: { params: { invoiceId: string } }) => {
   if (!result) return notFound()
 
   return (
-    <main className="h-full max-w-5xl mx-auto my-12">
+    <Container>
       <div className="flex items-center gap-3">
         <h1 className="text-3xl font-semibold">Invoice #{invoiceId}</h1>
         <Badge
@@ -46,7 +47,7 @@ const InvoicePage = async ({ params }: { params: { invoiceId: string } }) => {
         <li>Billing Name: John Doe</li>
         <li>Billing Email: john@gmail.com</li>
       </ul>
-    </main>
+    </Container>
   );
 };
 

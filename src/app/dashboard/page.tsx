@@ -15,12 +15,13 @@ import Link from 'next/link';
 import { db } from '@/db';
 import { Invoices } from '@/db/schema';
 import { cn } from '@/lib/utils';
+import Container from '@/components/Container';
 
 export default async function DashboardPage() {
   const results = await db.select().from(Invoices);
 
   return (
-    <main className="flex flex-col justify-center items-center h-full text-center gap-6 max-w-5xl mx-auto my-12">
+    <Container>
       <div className="flex justify-between w-full">
         <h1 className="text-3xl font-semibold">Dashboard</h1>
         <Button variant="ghost" className="inline-flex gap-2" asChild>
@@ -82,6 +83,6 @@ export default async function DashboardPage() {
           ))}
         </TableBody>
       </Table>
-    </main>
+    </Container>
   );
 }
