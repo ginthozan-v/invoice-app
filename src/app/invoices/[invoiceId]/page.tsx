@@ -1,5 +1,4 @@
 import { eq } from 'drizzle-orm';
-
 import { db } from '@/db';
 import { Invoices } from '@/db/schema';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +6,13 @@ import { cn } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 import Container from '@/components/Container';
 
-const InvoicePage = async ({ params }: { params: { invoiceId: string } }) => {
+interface PageProps {
+  params: {
+    invoiceId: string;
+  };
+}
+
+const InvoicePage = async ({ params }: PageProps) => {
   const invoiceId = parseInt(params.invoiceId);
 
   if (isNaN(invoiceId)) {
@@ -20,7 +25,9 @@ const InvoicePage = async ({ params }: { params: { invoiceId: string } }) => {
     .where(eq(Invoices.id, invoiceId))
     .limit(1);
 
-  if (!result) return notFound()
+  if (!result) {
+    notFound();
+  }
 
   return (
     <Container>
