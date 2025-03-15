@@ -8,6 +8,13 @@
       "when": 1737881648022,
       "tag": "0000_light_ironclad",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1742063901133,
+      "tag": "0001_charming_venus",
+      "breakpoints": true
     }
   ]
 }

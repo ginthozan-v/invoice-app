@@ -6,21 +6,30 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { CirclePlus } from 'lucide-react';
-import Link from 'next/link';
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { CirclePlus } from "lucide-react";
+import Link from "next/link";
 
-import { db } from '@/db';
-import { Invoices } from '@/db/schema';
-import { cn } from '@/lib/utils';
-import Container from '@/components/Container';
+import { db } from "@/db";
+import { Invoices } from "@/db/schema";
+import { cn } from "@/lib/utils";
+import Container from "@/components/Container";
+import { auth } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
 
 export default async function DashboardPage() {
-  const results = await db.select().from(Invoices);
+  const { userId } = await auth();
+  if (!userId) return;
+
+  const results = await db
+    .select()
+    .from(Invoices)
+    .where(eq(Invoices.userId, userId));
 
   return (
+    <div>
     <Container>
       <div className="flex justify-between w-full">
         <h1 className="text-3xl font-semibold">Dashboard</h1>
@@ -63,11 +72,11 @@ export default async function DashboardPage() {
                 <Link href={`/invoices/${invoice.id}`} className="block p-4">
                   <Badge
                     className={cn(
-                      'rounded-full text-white capitalize',
-                      invoice.status === 'open' && 'bg-green-500',
-                      invoice.status === 'paid' && 'bg-green-600',
-                      invoice.status === 'void' && 'bg-zinc-700',
-                      invoice.status === 'uncollectible' && 'bg-red-600'
+                      "rounded-full text-white capitalize",
+                      invoice.status === "open" && "bg-green-500",
+                      invoice.status === "paid" && "bg-green-600",
+                      invoice.status === "void" && "bg-zinc-700",
+                      invoice.status === "uncollectible" && "bg-red-600"
                     )}
                   >
                     {invoice.status}
@@ -84,5 +93,6 @@ export default async function DashboardPage() {
         </TableBody>
       </Table>
     </Container>
+    </div>
   );
 }
