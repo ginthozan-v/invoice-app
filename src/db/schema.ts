@@ -19,5 +19,15 @@ export const Invoices = pgTable("invoices", {
   value: integer("value").notNull(),
   description: text("description").notNull(),
   userId: text("userID"),
+  customerId: integer("customerID").notNull().references(() => Customers.id),
   status: statusEnum("status").notNull(),
 });
+
+export const Customers = pgTable("customers", {
+  id: serial("id").primaryKey().notNull(),
+  createTs: timestamp("createTs").notNull().defaultNow(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  userId: text("userID"),
+});
+

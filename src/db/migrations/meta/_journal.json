@@ -15,6 +15,13 @@
       "when": 1742063901133,
       "tag": "0001_charming_venus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1742657835625,
+      "tag": "0002_glorious_korg",
+      "breakpoints": true
     }
   ]
 }
